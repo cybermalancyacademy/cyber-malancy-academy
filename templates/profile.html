@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile | Cyber Malancy Academy{% endblock %}
+
+{% block content %}
+<section class="page-hero compact">
+  <div class="container">
+    <span class="eyebrow">STUDENT ACCOUNT</span>
+    <h1>My Profile</h1>
+    <p>Welcome to your personal learning profile.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width:700px">
+
+    <article class="progress-card" style="padding:2rem">
+      <div style="text-align:center;margin-bottom:1.5rem">
+        <div style="width:90px;height:90px;border-radius:50%;background:#1e3a8a;color:white;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700;margin:0 auto 1rem">
+          {{ user.username[0]|upper }}
+        </div>
+
+        <h2>{{ user.username }}</h2>
+        <p class="muted">Cyber Malancy Academy Student</p>
+      </div>
+
+      <div style="border-top:1px solid rgba(148,163,184,.25);padding-top:1rem">
+        <p><strong>Username:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Student ID:</strong> {{ user.id }}</p>
+      </div>
+
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem">
+        <a class="btn btn-primary" href="{{ url_for('dashboard') }}">
+          My Dashboard
+        </a>
+        <a class="btn btn-primary" href="{{ url_for('edit_profile') }}">
+        Edit Profile
+        </a>
+        <a class="btn btn-secondary" href="{{ url_for('index') }}">
+          Back to Home
+        </a>
+        <a class="btn btn-secondary" href="{{ url_for('change_password') }}">
+          Change Password
+        </a>
+      </div>
+    </article>
+
+  </div>
+</section>
+{% endblock %}

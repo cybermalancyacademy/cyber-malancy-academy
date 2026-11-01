@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Create account' if mode == 'register' else 'Log in' }} | Cyber Malancy Academy{% endblock %}
+{% block content %}
+<section class="auth-section"><div class="auth-card"><a class="brand auth-brand" href="{{ url_for('index') }}"><span class="brand-mark">&lt;/&gt;</span><span>Cyber Malancy <small>ACADEMY</small></span></a>
+<span class="eyebrow">{{ 'YOUR LEARNING JOURNEY' if mode == 'register' else 'WELCOME BACK' }}</span>
+<h1>{{ 'Create your account' if mode == 'register' else 'Log in to continue' }}</h1><p>{{ 'Save your progress and learn at your own pace.' if mode == 'register' else 'Pick up where you left off.' }}</p>
+<form method="post" class="auth-form">
+{% if mode == 'register' %}<label>Username<input name="username" required minlength="3" autocomplete="username" placeholder="Choose a username"></label>{% endif %}
+<label>Email address<input type="email" name="email" required autocomplete="email" placeholder="you@example.com"></label>
+<label>Password<input type="password" name="password" required minlength="8" autocomplete="{{ 'new-password' if mode == 'register' else 'current-password' }}" placeholder="At least 8 characters"></label>
+<button class="btn btn-primary full" type="submit">{{ 'Create account' if mode == 'register' else 'Log in' }} →</button>
+</form>
+<p class="auth-switch">{% if mode == 'register' %}Already registered? <a href="{{ url_for('login') }}">Log in</a>{% else %}New here? <a href="{{ url_for('register') }}">Create an account</a>{% endif %}</p>
+</div></section>
+{% endblock %}

@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+portal.db
+.env
+cm_patch/
+.env.*
+*.sqlite3
+.DS_Store
+*.db
+instance/

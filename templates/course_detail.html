@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}{{ course.title }} | Cyber Malancy Academy{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="container"><a class="back-link" href="{{ url_for('courses_page') }}">← All courses</a><span class="eyebrow">{{ course.level }}</span><h1>{{ course.title }}</h1><p>{{ course.description }}</p></div></section>
+
+<section class="section">
+<div class="container">
+
+    <div class="course-progress">
+        <div class="progress-info">
+            <strong>Course Progress</strong>
+            <span>{{ completed_lessons }} / {{ total_lessons }} Lessons Completed</span>
+            <strong>{{ progress_percent }}%</strong>
+        </div>
+
+        <div class="progress-track">
+            <div class="progress-fill"
+                 [style="width"]: {{ progress_percent }}%;">
+            </div>
+        </div>
+    </div>
+
+    <div class="syllabus-layout"><div>
+{% for module in modules %}
+<div class="module-card"><div class="module-heading"><span class="module-index">{{ "%02d"|format(loop.index) }}</span><h2>{{ module.name }}</h2><span class="lesson-count">{{ module.lessons|length }} lessons</span></div>
+{% for lesson in module.lessons %}
+<a class="lesson-row" href="{{ url_for('lesson_page', slug=course.slug, module_num=module.module_num, lesson_num=lesson.lesson_num) }}">
+  <span class="lesson-play">{% if lesson.completed %}✓{% else %}▶{% endif %}</span><span class="lesson-title-wrap"><strong>{{ lesson.title }}</strong><small>{{ lesson.description }}</small></span><span class="lesson-status">{% if lesson.completed %}Completed{% else %}Open lesson →{% endif %}</span>
+</a>
+{% endfor %}</div>
+{% endfor %}
+</div><aside class="side-note"><div class="side-note-icon">✦</div><h3>Learn by doing</h3><p>Read each lesson, try the practical task, and mark it complete to track your progress.</p>
+  {% if course.slug == 'python-programming' %}
+<a class="btn btn-primary full"
+   href="{{ url_for('python_basics_quiz') }}">
+   Take Python Quiz →
+</a>
+{% endif %}
+{% if course.slug == 'web-development' %}
+<a class="btn btn-primary full"
+   href="{{ url_for('web_development_quiz') }}">
+   Take Web Development Quiz →
+</a>
+{% endif %}
+{% if course.slug == 'introduction-cyber-security' %}
+<a class="btn btn-primary full"
+   href="{{ url_for('cyber_security_quiz') }}">
+   Take Cyber Security Quiz →
+</a>
+{% endif %}
+{% if course.slug == 'networking-fundamentals' %}
+<a class="btn btn-primary full"
+   href="{{ url_for('networking_quiz') }}">
+   Take Networking Quiz →
+</a>
+{% endif %}
+{% if course.slug == 'network-security' %}
+<a class="btn btn-primary full" href="{{ url_for('course_quiz', quiz_key='network-security') }}">Take Network Security Quiz →</a>
+{% endif %}
+{% if course.slug == 'linux-fundamentals' %}
+<a class="btn btn-primary full" href="{{ url_for('course_quiz', quiz_key='linux-fundamentals') }}">Take Linux Quiz →</a>
+{% endif %}
+{% if course.slug == 'database-fundamentals' %}
+<a class="btn btn-primary full" href="{{ url_for('course_quiz', quiz_key='database-fundamentals') }}">Take Database Quiz →</a>
+{% endif %}
+{% if course.slug == 'git-github' %}
+<a class="btn btn-primary full" href="{{ url_for('course_quiz', quiz_key='git-github') }}">Take Git and GitHub Quiz →</a>
+{% endif %}
+{% if course.slug == 'app-development' %}
+<a class="btn btn-primary full" href="{{ url_for('course_quiz', quiz_key='app-development') }}">Take App Development Quiz →</a>
+{% endif %}
+{% if course.slug == 'full-stack-python' %}
+<a class="btn btn-primary full" href="{{ url_for('course_quiz', quiz_key='full-stack-python') }}">Take Full-Stack Quiz →</a>
+{% endif %}
+{% if current_user %}<a class="btn btn-primary full" href="{{ url_for('dashboard') }}">My dashboard</a>{% else %}<a class="btn btn-primary full" href="{{ url_for('register') }}">Join to track progress</a>{% endif %}</aside></div></section>
+{% endblock %}

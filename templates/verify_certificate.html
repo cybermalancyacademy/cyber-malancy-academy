@@ -1,0 +1,39 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="form-card">
+            <h1>Verify Certificate</h1>
+            <p>Enter the Certificate ID to verify its authenticity.</p>
+
+            <form method="POST">
+                <label for="certificate_id">Certificate ID</label>
+                <input
+                    type="text"
+                    id="certificate_id"
+                    name="certificate_id"
+                    placeholder="CMA-XXXXXXXXXX"
+                    required
+                >
+
+                <button type="submit">Verify Certificate</button>
+            </form>
+
+            {% if certificate_data %}
+                <div class="success-message">
+                    <h2>Certificate Verified ✓</h2>
+                    <p><strong>Student:</strong> {{ certificate_data.student }}</p>
+                    <p><strong>Course:</strong> {{ certificate_data.course }}</p>
+                    <p><strong>Certificate ID:</strong> {{ certificate_data.certificate_id }}</p>
+                </div>
+            {% elif message %}
+                <div class="error-message">
+                    {{ message }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

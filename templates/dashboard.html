@@ -1,0 +1,198 @@
+
+{% extends "base.html" %}
+{% block title %}My Dashboard | Cyber Malancy Academy{% endblock %}
+
+{% block content %}
+<section class="page-hero compact">
+  <div class="container">
+    <span class="eyebrow">STUDENT DASHBOARD</span>
+    <h1>Keep up the momentum, {{ user.username }}.</h1>
+    <p>Your progress is saved as you complete lessons and take quizzes.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="progress-overview">
+      <div>
+        <span class="eyebrow">OVERALL PROGRESS</span>
+        <strong class="big-percent">{{ percent }}%</strong>
+        <p>{{ completed }} of {{ total }} lessons completed</p>
+      </div>
+      <div class="progress-track">
+        <span [style="width]: {{ percent }}%"></span>
+      </div>
+    </div>
+
+    <h2 class="dashboard-title">Your Learning Statistics</h2>
+
+    <div class="dashboard-courses">
+      <article class="progress-card">
+        <div class="progress-card-top">
+          <div>
+            <span class="level-tag">QUIZZES</span>
+            <h3>Quizzes Taken</h3>
+          </div>
+          <strong>{{ quiz_count }}</strong>
+        </div>
+        <p>Total quizzes you have submitted.</p>
+      </article>
+
+      <article class="progress-card">
+        <div class="progress-card-top">
+          <div>
+            <span class="level-tag">PERFORMANCE</span>
+            <h3>Average Score</h3>
+          </div>
+          <strong>{{ average_score }}%</strong>
+        </div>
+        <div class="progress-track">
+          <span [style="width]: {{ average_score }}%"></span>
+        </div>
+        <p>Your overall quiz performance.</p>
+      </article>
+    </div>
+
+    <h2 class="dashboard-title">Recent Quiz Results</h2>
+
+    {% if recent_quizzes %}
+      <div class="dashboard-courses">
+        {% for quiz in recent_quizzes %}
+          <article class="progress-card">
+            <div class="progress-card-top">
+              <div>
+                <span class="level-tag">QUIZ RESULT</span>
+                <h3>
+                  {% if quiz.quiz_key == 'python-basics' %}
+                    Python Basics
+                  {% elif quiz.quiz_key == 'web-development' %}
+                    Web Development
+                  {% else %}
+                    {{ quiz.quiz_key|replace('-', ' ')|title }}
+                  {% endif %}
+                </h3>
+              </div>
+              <strong>{{ quiz.percent }}%</strong>
+            </div>
+
+            <div class="progress-track">
+              <span [style="width]: {{ quiz.percent }}%"></span>
+            </div>
+
+            <p>Score: {{ quiz.score }} / {{ quiz.total }}</p>
+            <p class="muted">Date: {{ quiz.taken_at }}</p>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="progress-card">
+        <h3>No quiz results yet</h3>
+        <p>Take a quiz to see your score and track your progress here.</p>
+        <a class="card-link" href="{{ url_for('python_basics_quiz') }}">
+          Take Python Quiz →
+        </a>
+        <br>
+        <a class="card-link" href="{{ url_for('web_development_quiz') }}">
+          Take Web Development Quiz →
+        </a>
+      </div>
+    {% endif %}
+      
+<section class="leaderboard-section" style="margin-top: 40px;">
+    <h2>🏆 Student Leaderboard</h2>
+    <p>Top 10 students based on quiz performance.</p>
+
+    {% if leaderboard %}
+    <div class="admin-table-wrap">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Student</th>
+                    <th>Total Score</th>
+                    <th>Total Questions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in leaderboard %}
+                <tr>
+                    <td>
+                        {% if loop.index == 1 %}
+                            🥇 1st
+                        {% elif loop.index == 2 %}
+                            🥈 2nd
+                        {% elif loop.index == 3 %}
+                            🥉 3rd
+                        {% else %}
+                            {{ loop.index }}
+                        {% endif %}
+                    </td>
+                    <td>{{ student.username }}</td>
+                    <td>{{ student.total_score }}</td>
+                    <td>{{ student.total_questions }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p>No leaderboard results yet.</p>
+    {% endif %}
+</section>
+
+<section class="badges-section" style="margin-top: 40px;">
+    <h2>🏅 My Achievements</h2>
+
+    {% if badges %}
+    <div class="analytics-grid">
+        {% for badge in badges %}
+        <div class="analytics-card">
+            <h2>{{ badge.icon }}</h2>
+            <h3>{{ badge.name }}</h3>
+            <p>{{ badge.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No achievements yet. Keep learning!</p>
+    {% endif %}
+</section>
+
+    <h2 class="dashboard-title">Your Courses</h2>
+
+    <div class="dashboard-courses">
+      {% for item in course_progress %}
+        <article class="progress-card">
+          <div class="progress-card-top">
+            <div>
+              <span class="level-tag">{{ item.course.level }}</span>
+              <h3>{{ item.course.title }}</h3>
+            </div>
+            <strong>{{ item.percent }}%</strong>
+          </div>
+
+          <div class="progress-track">
+            <span [style="width]: {{ item.percent }}%"></span>
+          </div>
+
+          <p>{{ item.completed }} / {{ item.total }} lessons completed</p>
+
+          <a class="card-link"
+             href="{{ url_for('course_detail', slug=item.course.slug) }}">
+            Continue learning →
+          </a>
+          {% if item.total > 0 and item.completed == item.total %}
+           <br><br>
+             <a class="card-link"
+             href="{{ url_for('certificate', slug=item.course.slug) }}">
+            View Certificate 🎓 →
+          </a>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} | Cyber Malancy Academy{% endblock %}
+{% block content %}
+<section class="lesson-page"><div class="container lesson-layout">
+<article class="lesson-content">
+<a class="back-link" href="{{ url_for('course_detail', slug=course.slug) }}">← Back to syllabus</a>
+<div class="lesson-meta"><span>{{ course.title }}</span><span>•</span><span>{{ module_name }}</span></div>
+<h1>{{ title }}</h1><p class="lesson-summary">{{ summary }}</p>
+<div class="lesson-prose"><h2>Lesson notes</h2><p>{{ content }}</p>{{ example|safe }}<div class="exercise-box"><span class="eyebrow">YOUR TURN</span><h3>Practical exercise</h3><p>{{ exercise }}</p></div></div>
+
+{% if completed %}
+    <div class="complete-form">
+        <span class="btn btn-completed">✓ Lesson completed</span>
+
+        {% if next_lesson %}
+            <a class="btn btn-primary"
+               href="{{ url_for('lesson_page',
+                   slug=next_lesson['slug'],
+                   module_num=next_lesson['module_num'],
+                   lesson_num=next_lesson['lesson_num']) }}">
+                Next Lesson →
+            </a>
+        {% else %}
+            <span class="btn btn-completed">🎉 Course Completed!</span>
+        {% endif %}
+    </div>
+{% else %}
+    <form action="{{ url_for('complete_lesson') }}"
+          method="post"
+          class="complete-form">
+        <input type="hidden" name="lesson_key" value="{{ lesson_key }}">
+        <button class="btn btn-primary" type="submit">
+            Mark as completed ✓
+        </button>
+    </form>
+{% endif %}
+</article>
+<aside class="lesson-sidebar"><span class="eyebrow">YOUR LEARNING PATH</span><h3>{{ course.title }}</h3><p>Take your time, practice each concept, and return to lessons whenever you need a refresher.</p><a class="text-link" href="{{ url_for('course_detail', slug=course.slug) }}">View all lessons →</a></aside>
+</div></section>
+{% endblock %}

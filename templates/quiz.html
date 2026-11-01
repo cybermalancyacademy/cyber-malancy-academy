@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Python Basics Quiz | Cyber Malancy Academy{% endblock %}
+{% block content %}
+<section class="page-hero compact"><div class="container"><span class="eyebrow">CHECK YOUR UNDERSTANDING</span><h1>Python Basics Quiz</h1><p>Answer these five questions about your first Python lessons.</p></div></section>
+<section class="section"><div class="container" style="max-width:850px">
+{% if result %}
+<div class="module-card" style="padding:1.5rem;margin-bottom:1.5rem"><span class="eyebrow">YOUR RESULT</span><h2>{{ result.score }} / {{ result.total }} correct — {{ result.percent }}%</h2><p>{% if result.percent >= 80 %}Excellent work! Keep learning and practicing.{% elif result.percent >= 60 %}Good effort. Review the lessons and try again.{% else %}Keep going. Revisit the Python Basics lessons, then try again.{% endif %}</p><a class="btn btn-secondary" href="{{ url_for('python_basics_quiz') }}">Try again</a></div>
+{% endif %}
+<form method="post" class="module-card" style="padding:1.5rem">
+{% for q in questions %}
+{% set question_index = loop.index0 %}
+<fieldset style="border:0;border-bottom:1px solid rgba(148,163,184,.25);padding:0 0 1.25rem;margin:0 0 1.25rem">
+<legend style="font-weight:700;margin-bottom:.8rem">{{ loop.index }}. {{ q.question }}</legend>
+{% for option in q.options %}<label style="display:block;padding:.45rem 0;cursor:pointer"><input type="radio" name="q{{ question_index }}" value="{{ loop.index0 }}" required> {{ option }}</label>{% endfor %}
+</fieldset>
+{% endfor %}
+<button class="btn btn-primary" type="submit">Submit answers</button>
+</form>
+
+{% if review %}
+<div class="module-card" style="padding:1.5rem;margin-top:1.5rem">
+    <span class="eyebrow">LEARN FROM YOUR ANSWERS</span>
+    <h2>Review Your Answers</h2>
+
+    {% for item in review %}
+    <div style="padding:1rem 0;border-bottom:1px solid rgba(148,163,184,.25)">
+        <h3>{{ loop.index }}. {{ item.question }}</h3>
+
+        {% if item.is_correct %}
+            <p style="color:green;font-weight:700">✓ Correct</p>
+        {% else %}
+            <p style="color:#dc2626;font-weight:700">✗ Incorrect</p>
+        {% endif %}
+
+        <p><strong>Your answer:</strong> {{ item.selected }}</p>
+        <p><strong>Correct answer:</strong> {{ item.correct }}</p>
+        <p><strong>Explanation:</strong> {{ item.explanation }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% if latest_result %}<p class="muted" style="margin-top:1rem">Your last saved result: {{ latest_result.score }}/{{ latest_result.total }} ({{ latest_result.taken_at }}).</p>{% endif %}
+<p style="margin-top:1rem"><a class="back-link" href="{{ url_for('course_detail', slug='python-programming') }}">← Back to Python Programming</a></p>
+</div></section>
+{% endblock %}

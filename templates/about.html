@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}About | Cyber Malancy Academy{% endblock %}
+{% block content %}
+<section class="page-hero"><div class="container"><span class="eyebrow">ABOUT THE ACADEMY</span><h1>Skills grow when <span class="gradient-text">practice comes first.</span></h1><p>Cyber Malancy Academy is a learning project focused on helping beginners build confidence in programming and web development.</p></div></section>
+<section class="section"><div class="container narrow-copy"><h2>Our learning approach</h2><p>Start with the fundamentals, work through short lessons, write code yourself, and build projects that demonstrate what you know.</p><h2>What you can learn</h2><p>Explore web development, Python programming, and full-stack concepts. The lessons are designed as a starter curriculum and can be expanded with videos, downloadable notes, quizzes, and instructor-created material.</p><a class="btn btn-primary" href="{{ url_for('courses_page') }}">Explore courses →</a></div></section>
+{% endblock %}

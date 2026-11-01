@@ -1,0 +1,50 @@
+
+{% extends "base.html" %}
+
+{% block title %}Edit Profile | Cyber Malancy Academy{% endblock %}
+
+{% block content %}
+<section class="page-hero compact">
+  <div class="container">
+    <span class="eyebrow">ACCOUNT SETTINGS</span>
+    <h1>Edit My Profile</h1>
+    <p>Update your username and email address.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width:650px">
+    <form method="post" class="progress-card" style="padding:2rem">
+
+      <label for="username">Username</label>
+      <input
+        id="username"
+        name="username"
+        type="text"
+        value="{{ user.username }}"
+        minlength="3"
+        required
+        style="display:block;width:100%;padding:.8rem;margin:.5rem 0 1.25rem"
+      >
+
+      <label for="email">Email address</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        value="{{ user.email }}"
+        required
+        style="display:block;width:100%;padding:.8rem;margin:.5rem 0 1.5rem"
+      >
+
+      <button class="btn btn-primary" type="submit">
+        Save Changes
+      </button>
+
+      <a class="btn btn-secondary" href="{{ url_for('profile') }}">
+        Cancel
+      </a>
+    </form>
+  </div>
+</section>
+{% endblock %}

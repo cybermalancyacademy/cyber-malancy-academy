@@ -1,0 +1,377 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate | Cyber Malancy Academy</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 15px;
+            background: #050914;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .certificate {
+            max-width: 1150px;
+            margin: auto;
+            padding: 9px;
+            background: linear-gradient(
+                135deg, #8d641d, #ffe6a0, #b8862b, #f8d777
+            );
+            box-shadow: 0 20px 60px #0009;
+        }
+
+        .inner {
+            position: relative;
+            overflow: hidden;
+            min-height: 700px;
+            padding: 35px 45px;
+            text-align: center;
+            border: 2px solid #d4a63c;
+            background:
+                radial-gradient(ellipse at 15% 45%,
+                    #0b2545 0%, transparent 36%),
+                radial-gradient(ellipse at 90% 90%,
+                    #10213b 0%, transparent 35%),
+                linear-gradient(135deg, #030711, #071326 60%, #02050c);
+        }
+
+        .inner::before {
+            content: "";
+            position: absolute;
+            inset: 12px;
+            border: 1px solid #a87d2d;
+            pointer-events: none;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .shield {
+            width: 82px;
+            height: 92px;
+            display: grid;
+            place-items: center;
+            flex-shrink: 0;
+            color: #ffdc78;
+            font-size: 27px;
+            font-weight: bold;
+            border: 3px solid #d9ac49;
+            clip-path: polygon(50% 0, 100% 18%, 90% 72%,
+                50% 100%, 10% 72%, 0 18%);
+            background: #0b1930;
+        }
+
+        .academy {
+            margin: 0;
+            color: #f7d77f;
+            font-family: Georgia, serif;
+            font-size: clamp(23px, 4vw, 39px);
+            letter-spacing: 2px;
+        }
+
+        .subheading {
+            margin-top: 7px;
+            font-size: 13px;
+            letter-spacing: 6px;
+            color: #e9edf5;
+        }
+
+        .motto {
+            margin-top: 13px;
+            color: #c7d4e8;
+            font-size: 12px;
+            letter-spacing: 4px;
+        }
+
+        .certificate-id {
+            margin-top: 22px;
+            color: #f2d27b;
+            font-size: 11px;
+            letter-spacing: 2px;
+        }
+
+        .certificate-id strong {
+            display: block;
+            margin-top: 7px;
+            color: white;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+
+        .heading {
+            margin: 35px 0 0;
+            color: #f8d777;
+            font-family: Georgia, serif;
+            font-size: clamp(36px, 6vw, 62px);
+            letter-spacing: 4px;
+        }
+
+        .achievement {
+            margin-top: 5px;
+            color: #e6bd59;
+            font-family: Georgia, serif;
+            font-size: 21px;
+            letter-spacing: 5px;
+        }
+
+        .rule {
+            width: 70%;
+            height: 1px;
+            margin: 22px auto;
+            background: linear-gradient(
+                90deg, transparent, #f6d36d, transparent
+            );
+        }
+
+        .presented {
+            color: #e2e7ef;
+            font-size: 13px;
+            letter-spacing: 3px;
+        }
+
+        .student {
+            margin: 20px 0 12px;
+            padding-bottom: 12px;
+            color: #f5cf6c;
+            border-bottom: 1px solid #bb8e34;
+            font-family: Georgia, serif;
+            font-size: clamp(27px, 5vw, 44px);
+            overflow-wrap: anywhere;
+        }
+
+        .description {
+            color: #e1e6ef;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .course {
+            margin: 12px 0;
+            color: #f5cc63;
+            font-family: Georgia, serif;
+            font-size: clamp(21px, 3vw, 30px);
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+
+        .date {
+            margin-top: 25px;
+            color: #f6d477;
+            font-size: 15px;
+        }
+
+        .date-label {
+            margin-top: 7px;
+            color: #b8c5d9;
+            font-size: 10px;
+            letter-spacing: 3px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 20px;
+            margin-top: 35px;
+        }
+
+        .signature {
+            flex: 1;
+            padding-top: 10px;
+            border-top: 1px solid #c39a42;
+            color: #e2e7ef;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        .seal {
+            width: 90px;
+            height: 90px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border: 4px double #f2cf6b;
+            border-radius: 50%;
+            color: #f5d57e;
+            font-size: 11px;
+            font-weight: bold;
+            line-height: 1.5;
+            box-shadow: 0 0 0 5px #d5a63b22;
+        }
+
+        .bottom-line {
+            margin-top: 30px;
+            color: #e9c35e;
+            font-size: 10px;
+            letter-spacing: 3px;
+        }
+
+        .actions {
+            margin: 22px auto;
+            text-align: center;
+        }
+
+        button {
+            padding: 13px 23px;
+            margin: 5px;
+            border: 1px solid #e3bd5e;
+            border-radius: 5px;
+            background: #0d1b32;
+            color: #ffe29a;
+            cursor: pointer;
+        }
+
+        @page {
+            size: A4 landscape;
+            margin: 5mm;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: #050914;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .certificate {
+                width: 100%;
+                max-width: none;
+                box-shadow: none;
+            }
+
+            .inner {
+                min-height: 185mm;
+            }
+
+            .actions {
+                display: none;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .inner {
+                padding: 30px 20px;
+            }
+
+            .header {
+                flex-direction: column;
+            }
+
+            .subheading,
+            .motto {
+                letter-spacing: 2px;
+            }
+
+            .footer {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .signature {
+                min-width: 120px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="certificate">
+        <section class="inner">
+            <div class="content">
+
+                <header class="header">
+                    <div class="shield">CM</div>
+
+                    <div>
+                        <h1 class="academy">CYBER MALANCY</h1>
+                        <div class="subheading">A C A D E M Y</div>
+                        <div class="motto">LEARN · BUILD · SECURE</div>
+                    </div>
+                </header>
+
+                <div class="certificate-id">
+                    CERTIFICATE ID
+                    <strong>{{ certificate_id }}</strong>
+                </div>
+
+                <h2 class="heading">CERTIFICATE</h2>
+                <div class="achievement">OF ACHIEVEMENT</div>
+
+                <div class="rule"></div>
+
+                <p class="presented">
+                    THIS CERTIFICATE IS PROUDLY PRESENTED TO
+                </p>
+
+                <div class="student">{{ user.username }}</div>
+
+                <p class="description">
+                    In recognition of successfully completing the course
+                </p>
+
+                <div class="course">{{ course.title }}</div>
+
+                <p class="description">
+                    For dedication, hard work and commitment to learning<br>
+                    and developing valuable digital skills.
+                </p>
+
+                <div class="date">{{ completion_date }}</div>
+                <div class="date-label">DATE OF COMPLETION</div>
+
+                <footer class="footer">
+                    <div class="signature">
+                        CYBER MALANCY ACADEMY<br>
+                        <strong>Learning &amp; Development</strong>
+                    </div>
+
+                    <div class="seal">
+                        CM<br>ACHIEVEMENT
+                    </div>
+
+                    <div class="signature">
+                        COURSE COMPLETION<br>
+                        <strong>Certificate of Achievement</strong>
+                    </div>
+                </footer>
+
+                <div class="bottom-line">
+                    CYBERSECURITY &nbsp; | &nbsp; PROGRAMMING
+                    &nbsp; | &nbsp; DIGITAL SKILLS
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    
+    <div class="actions">
+        <button onclick="window.print()">
+            ⬇ Download Certificate (PDF)
+        </button>
+
+        <button onclick="history.back()">
+            Back to Course
+        </button>
+    </div>
+</body>
+</html>
