@@ -293,6 +293,13 @@ def init_db():
                 UNIQUE(user_id, course_slug)
             )
         """)
+        admin_email = os.environ.get("ADMIN_EMAIL", "").strip().lower()
+
+        if admin_email:
+            con.execute(
+                "UPDATE users SET is_admin = 1 WHERE LOWER(email) = ?",
+                (admin_email,)
+            )
         con.commit()
 
 
@@ -330,7 +337,7 @@ def get_all_users():
     with sqlite3.connect(DB_PATH) as con:
         con.row_factory = sqlite3.Row
         users = con.execute(
-            "SELECT id, username, email FROM users"
+            "SELECT id, username, email, is_admin FROM users"
         ).fetchall()
 
     return [dict(user) for user in users]
